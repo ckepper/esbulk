@@ -21,7 +21,7 @@ import (
 )
 
 // Version of application.
-const Version = "0.5.2"
+const Version = "0.6.0"
 
 var (
 	version         = flag.Bool("v", false, "prints current program version")
@@ -198,7 +198,7 @@ func main() {
 		// Shutdown procedure. TODO(miku): Handle signals, too.
 		defer func() {
 			// Realtime search.
-			if _, err := indexSettingsRequest(fmt.Sprintf(`{"index": {"refresh_interval": %s}}`, refreshInterval), options); err != nil {
+			if _, err := indexSettingsRequest(fmt.Sprintf(`{"index": {"refresh_interval": "%s"}}`, refreshInterval), options); err != nil {
 				log.Fatal(err)
 			}
 			// Reset number of replicas.
