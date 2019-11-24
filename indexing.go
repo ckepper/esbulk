@@ -141,8 +141,13 @@ func BulkIndex(docs []string, options Options) error {
 				}
 			}
 
-			header = fmt.Sprintf(`{"index": {"_index": "%s", "_type": "%s", "_id": %q}}`,
-				options.Index, options.DocType, idstr)
+			if options.DocType != "default" {
+				header = fmt.Sprintf(`{"index": {"_index": "%s", "_type": "%s", "_id": %q}}`,
+					options.Index, options.DocType, idstr)
+			} else {
+				header = fmt.Sprintf(`{"index": {"_index": "%s", "_id": %q}}`,
+					options.Index, idstr)
+			}
 
 			// Remove the IDField if it is accidentally named '_id', since
 			// Field [_id] is a metadata field and cannot be added inside a
