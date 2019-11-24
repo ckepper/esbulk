@@ -191,7 +191,10 @@ func main() {
 		if *verbose {
 			log.Printf("on shutdown, number_of_replicas will be set back to %s", numberOfReplicas)
 		}
-
+		refreshInterval := *refreshInterval
+		if *verbose {
+			log.Printf("on shutdown, refresh_interval will be set back to %s", refreshInterval)
+		}
 		// Shutdown procedure. TODO(miku): Handle signals, too.
 		defer func() {
 			// Realtime search.
